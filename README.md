@@ -16,6 +16,12 @@ Leiningen plugin:
 :plugins [[net.totakke/lein-libra "0.1.0-SNAPSHOT"]]
 ```
 
+Boot task:
+
+```clojure
+[net.totakke/boot-libra "0.1.0-SNAPSHOT" :scope "test"]
+```
+
 ## Usage
 
 ```clojure
