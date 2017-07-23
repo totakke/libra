@@ -4,4 +4,5 @@
   :scm {:dir ".."}
   :license {:name "The MIT License"
             :url "https://opensource.org/licenses/MIT"}
-  :dependencies [[org.clojure/clojure "1.7.0" :scope "provided"]])
+  :dependencies [[org.clojure/clojure "1.7.0" :scope "provided"]]
+  :profiles {:dev {:dependencies [[org.clojure/test.check "0.9.0"]]}})
