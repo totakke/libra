@@ -1,5 +1,7 @@
 # Libra
 
+[![CircleCI](https://circleci.com/gh/totakke/libra.svg?style=svg)](https://circleci.com/gh/totakke/libra)
+
 Simple benchmarking framework for Clojure.
 
 ## Installation
