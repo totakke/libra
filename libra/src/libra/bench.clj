@@ -36,11 +36,14 @@
 
 (defn bench-ns
   [ns]
-  (let [ns-obj (the-ns ns)]
-    (newline)
-    (println "Measuring" (str ns-obj))
-    (doseq [v (vals (ns-interns ns-obj))]
-      (when (:bench (meta v))
+  (let [ns-obj (the-ns ns)
+        vs (->> (ns-interns ns-obj)
+                vals
+                (filter (comp :bench meta)))]
+    (when (seq vs)
+      (newline)
+      (println "Measuring" (str ns-obj))
+      (doseq [v vs]
         (bench-var v)
         (newline)))))
 
