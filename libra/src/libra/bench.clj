@@ -39,6 +39,7 @@
   (let [ns-obj (the-ns ns)
         vs (->> (ns-interns ns-obj)
                 vals
+                (sort-by (comp (juxt :file :line) meta))
                 (filter (comp :bench meta)))]
     (when (seq vs)
       (newline)
