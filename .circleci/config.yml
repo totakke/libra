@@ -11,10 +11,10 @@ jobs:
       - checkout
       - restore_cache:
           key: libra-{{ checksum "libra/project.clj" }}
-      - run: cd libra && lein deps
+      - run: cd libra && lein with-profile +dev:+1.8:+1.9 deps
       - save_cache:
           paths:
             - ~/.m2
             - ~/.lein
           key: libra-{{ checksum "libra/project.clj" }}
-      - run: cd libra && lein test
+      - run: cd libra && lein with-profile +dev:+1.8:+1.9 test
