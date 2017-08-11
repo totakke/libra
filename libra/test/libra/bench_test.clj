@@ -41,7 +41,7 @@
 
 (defspec mean-range-test
   100
-  (prop/for-all [v (-> (gen/double* {:infinite? false :NaN? false})
+  (prop/for-all [v (-> (gen/double* {:min -1e30 :max 1e30 :infinite? false :NaN? false})
                        gen/vector
                        gen/not-empty)]
     (<= (apply min v) (#'b/mean v) (apply max v))))
@@ -53,6 +53,6 @@
 
 (defspec variance-range-test
   100
-  (prop/for-all [v (gen/vector (gen/double* {:infinite? false :NaN? false})
+  (prop/for-all [v (gen/vector (gen/double* {:min -1e30 :max 1e30 :infinite? false :NaN? false})
                                2 100)]
     (<= 0.0 (#'b/variance v))))
