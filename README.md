@@ -1,5 +1,6 @@
 # Libra
 
+[![Clojars Project](https://img.shields.io/clojars/v/net.totakke/libra.svg)](https://clojars.org/net.totakke/libra)
 [![CircleCI](https://circleci.com/gh/totakke/libra.svg?style=svg)](https://circleci.com/gh/totakke/libra)
 
 Simple benchmarking framework for Clojure.
