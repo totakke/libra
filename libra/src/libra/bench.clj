@@ -1,4 +1,5 @@
-(ns libra.bench)
+(ns libra.bench
+  (:require [clojure.template :as temp]))
 
 (defn- scaled-time
   [nanos]
@@ -48,9 +49,25 @@
         (bench-var v)
         (newline)))))
 
-(defmacro measure
-  ([expr] `(measure ~expr nil))
+(defmacro is
+  ([expr] `(is ~expr nil))
   ([expr msg] `(report (assoc ~expr :message ~msg))))
+
+(defmacro are
+  [argv expr & args]
+  (letfn [(message [x]
+            (let [s (str x)]
+              (if (> (count s) 80) (subs s 0 80) s)))]
+    (if (or (and (empty? argv) (empty? args))
+            (and (pos? (count argv))
+                 (pos? (count args))
+                 (zero? (mod (count args) (count argv)))))
+      `(temp/do-template ~argv (is ~expr (~message ~argv)) ~@args)
+      (throw (IllegalArgumentException. "#args does not match argv")))))
+
+(defmacro ^:deprecated measure
+  ([expr] `(is ~expr))
+  ([expr msg] `(is ~expr ~msg)))
 
 (defmacro defbench
   [name & body]
