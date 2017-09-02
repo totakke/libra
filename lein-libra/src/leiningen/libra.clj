@@ -1,19 +1,35 @@
 (ns leiningen.libra
   (:require [clojure.java.io :as io]
+            [clojure.string :as string]
             [clojure.tools.namespace :as tns]
             [clojure.tools.reader.edn :as edn]
             [leiningen.core.eval :as eval]
             [leiningen.core.project :as project]))
 
+(defn- parse-only
+  [xs]
+  (->> xs
+       (map (fn [s]
+              (let [[ns* v] (string/split s #"/")]
+                [ns* v])))
+       (group-by first)
+       (map (fn [[k v]]
+              [(edn/read-string k)
+               (->> (keep second v)
+                    distinct
+                    (map #(str k "/" %))
+                    (map edn/read-string)
+                    seq)]))
+       (into {})))
+
 (defn- parse-args
   [args]
-  (let [args (map edn/read-string args)]
-    (if (= (first args) :only)
-      {:only (rest args)})))
+  (if (= (first args) ":only")
+    {:only (parse-only (rest args))}))
 
 (defn- select-namespaces
   [namespaces selectors]
-  (let [selector-nses (set (:only selectors))]
+  (let [selector-nses (-> (:only selectors) keys set)]
     (if (seq selector-nses)
       (filter selector-nses namespaces)
       namespaces)))
@@ -26,7 +42,10 @@
         `(let [~ns-sym '~namespaces]
            (when (seq ~ns-sym)
              (apply require :reload ~ns-sym))
-           (apply libra.bench/run-benches ~ns-sym))))))
+           (doseq [ns# ~ns-sym]
+             (if-let [vs# (get (:only '~selectors) ns#)]
+               (doseq [v# vs#] (libra.bench/bench-var (resolve v#)))
+               (libra.bench/bench-ns ns#))))))))
 
 (defn libra
   "Measure the project's benchmarks.
