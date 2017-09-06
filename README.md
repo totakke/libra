@@ -10,13 +10,13 @@ Simple benchmarking framework for Clojure.
 With Leiningen/Boot:
 
 ```clojure
-[net.totakke/libra "0.1.0-SNAPSHOT"]
+[net.totakke/libra "0.1.0"]
 ```
 
 Leiningen plugin:
 
 ```clojure
-:plugins [[net.totakke/lein-libra "0.1.0-SNAPSHOT"]]
+:plugins [[net.totakke/lein-libra "0.1.0"]]
 ```
 
 Boot task:
@@ -39,7 +39,7 @@ benchmarks in the namespace.
   (inc n))
 
 (defbench slow-inc-bench
-  (measure (dur 10 (slow-inc 100))))
+  (is (dur 10 (slow-inc 100))))
 
 (run-benches)
 ;; Measuring user
@@ -77,10 +77,10 @@ Locate your awesome codes in `src/example/core.clj` as usual, and write benchmar
             [example.core :refer :all]))
 
 (defbench primes-with-trial-div-bench
-  (measure (dur 10 (doall (primes-with-trial-div 100000)))))
+  (is (dur 10 (doall (primes-with-trial-div 100000)))))
 
 (defbench primes-with-eratosthenes-bench
-  (measure (dur 10 (doall (primes-with-eratosthenes 100000)))))
+  (is (dur 10 (doall (primes-with-eratosthenes 100000)))))
 ```
 
 ### With Leiningen
