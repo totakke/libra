@@ -12,16 +12,17 @@
 
 (deftask libra
   "Measure the project's benchmarks."
-  []
+  [n namespaces NAMESPACE #{sym} "The set of namespace symbols to run benchmarks in."]
   (let [updated-env (update-in (core/get-env) [:dependencies] into pod-deps)
         worker-pods (pod/pod-pool updated-env :init init)]
     (core/cleanup (worker-pods :shutdown))
     (core/with-pre-wrap fileset
       (let [worker-pod (worker-pods :refresh)
-            namespaces (->> (:source-paths (core/get-env))
-                            (map io/file)
-                            (mapcat tns/find-namespaces-in-dir)
-                            distinct)
+            namespaces (or (seq namespaces)
+                           (->> (:source-paths (core/get-env))
+                                (map io/file)
+                                (mapcat tns/find-namespaces-in-dir)
+                                distinct))
             ns-sym (gensym "namespaces")]
         (if (seq namespaces)
           (pod/with-eval-in worker-pod
