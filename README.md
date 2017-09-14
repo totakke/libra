@@ -22,7 +22,7 @@ Leiningen plugin:
 Boot task:
 
 ```clojure
-[net.totakke/boot-libra "0.1.0-SNAPSHOT" :scope "test"]
+[net.totakke/boot-libra "0.1.0" :scope "test"]
 ```
 
 ## Getting started
