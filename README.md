@@ -117,6 +117,17 @@ the classpath, so that you should add a profile task for benchmarking:
   identity)
 ```
 
+### Criterium integration
+
+`libra.criterium` provides wrapper macros of [Criterium](https://github.com/hugoduncan/criterium/).
+
+```clojure
+(require '[libra.criterium :as c])
+
+(defbench primes-with-eratosthenes-bench
+  (is (c/quick-bench (doall (primes-with-eratosthenes 100000)))))
+```
+
 ## License
 
 Copyright © 2017 Toshiki Takeuchi
