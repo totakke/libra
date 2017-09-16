@@ -1,4 +1,4 @@
-(defproject net.totakke/lein-libra "0.1.0"
+(defproject net.totakke/lein-libra "0.1.1-SNAPSHOT"
   :description "Libra Leiningen plugin"
   :url "https://github.com/totakke/libra"
   :scm {:dir ".."}

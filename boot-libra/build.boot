@@ -3,7 +3,7 @@
  :dependencies '[[org.clojure/clojure "1.7.0" :scope "provided"]
                  [org.clojure/tools.namespace "0.2.11"]])
 
-(def +version+ "0.1.0")
+(def +version+ "0.1.1-SNAPSHOT")
 
 (task-options!
  pom {:project 'net.totakke/boot-libra
