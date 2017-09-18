@@ -35,13 +35,17 @@
       (println (str (:name m) " (" (filename (:file m)) ":" (:line m) ")"))
       (b))))
 
+(def ^:dynamic *selector* (constantly true))
+
 (defn bench-ns
   [ns]
   (let [ns-obj (the-ns ns)
         vs (->> (ns-interns ns-obj)
                 vals
                 (sort-by (comp (juxt :file :line) meta))
-                (filter (comp :bench meta)))]
+                (filter (fn [v]
+                          (let [m (meta v)]
+                            (and (:bench m) (*selector* m))))))]
     (when (seq vs)
       (newline)
       (println "Measuring" (str ns-obj))
