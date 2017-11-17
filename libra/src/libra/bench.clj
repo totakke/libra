@@ -24,8 +24,8 @@
   [m]
   (newline)
   (when (:message m)
-    (println (:message m)))
-  (println (format "time: %s, sd: %s" (format-time (:time m)) (format-time (:sd m)))))
+    (println (str "  " (:message m))))
+  (println (format "  time: %s, sd: %s" (format-time (:time m)) (format-time (:sd m)))))
 
 (defn bench-var
   [v]
@@ -50,8 +50,7 @@
       (newline)
       (println "Measuring" (str ns-obj))
       (doseq [v vs]
-        (bench-var v)
-        (newline)))))
+        (bench-var v)))))
 
 (defmacro is
   ([expr] `(is ~expr nil))
