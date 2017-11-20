@@ -10,13 +10,13 @@ Simple benchmarking framework for Clojure.
 With Leiningen/Boot:
 
 ```clojure
-[net.totakke/libra "0.1.0"]
+[net.totakke/libra "0.1.1"]
 ```
 
 Leiningen plugin:
 
 ```clojure
-:plugins [[net.totakke/lein-libra "0.1.0"]]
+:plugins [[net.totakke/lein-libra "0.1.1"]]
 ```
 
 Boot task:
@@ -46,7 +46,7 @@ benchmarks in the namespace.
 ;;
 ;; slow-inc-bench (:xx)
 ;;
-;; time: 11.725818 ms, sd: 1.073600 ms
+;;   time: 11.725818 ms, sd: 1.073600 ms
 ;;=> nil
 ```
 
@@ -96,6 +96,14 @@ this by placing the following in `project.clj`:
 
 ```clojure
 :libra {:bench-paths ["path/to/bench"]}
+```
+
+You can supply predicates to determine whether to run a benchmark or not, which
+takes `defbench` metadata as argument:
+
+```clojure
+:libra {:bench-selectors {:default (complement :slow)
+                          :slow :slow}}
 ```
 
 ### With Boot

@@ -1,4 +1,4 @@
-(defproject net.totakke/libra "0.1.1-SNAPSHOT"
+(defproject net.totakke/libra "0.1.1"
   :description "Simple benchmarking framework for Clojure"
   :url "https://github.com/totakke/libra"
   :scm {:dir ".."}
