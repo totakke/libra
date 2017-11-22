@@ -9,8 +9,8 @@
 (defbench primes-with-eratosthenes-bench
   (is (dur 10 (doall (primes-with-eratosthenes 100000)))))
 
-(defbench primes-with-trial-div-bench-precise
+(defbench ^:slow primes-with-trial-div-bench-precise
   (is (c/bench (doall (primes-with-trial-div 100000)))))
 
-(defbench primes-with-eratosthenes-bench-precise
+(defbench ^:slow primes-with-eratosthenes-bench-precise
   (is (c/bench (doall (primes-with-eratosthenes 100000)))))
