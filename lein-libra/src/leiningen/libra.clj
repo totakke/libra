@@ -37,7 +37,8 @@
   [args project]
   (let [given-selectors (split-args args)
         project-selectors (merge {:all '(constantly true)
-                                  :only '(constantly true)}
+                                  :only '(constantly true)
+                                  :default '(constantly true)}
                                  (-> project :libra :bench-selectors))
         selectors (->> given-selectors
                        (keep (fn [[k v]]
