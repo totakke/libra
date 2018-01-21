@@ -6,4 +6,4 @@
             :url "https://opensource.org/licenses/MIT"}
   :eval-in-leiningen true
   :dependencies [[org.clojure/tools.namespace "0.2.11"]
-                 [org.clojure/tools.reader "1.1.1"]])
+                 [org.clojure/tools.reader "1.1.3.1"]])
