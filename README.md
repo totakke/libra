@@ -16,7 +16,7 @@ With Leiningen/Boot:
 Leiningen plugin:
 
 ```clojure
-:plugins [[net.totakke/lein-libra "0.1.1"]]
+:plugins [[net.totakke/lein-libra "0.1.2"]]
 ```
 
 Boot task:
