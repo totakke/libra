@@ -2,6 +2,12 @@
 
 To run benchmark,
 
+with Clojure CLI:
+
+```console
+$ clj -Alibra
+```
+
 with Leiningen:
 
 ```console
