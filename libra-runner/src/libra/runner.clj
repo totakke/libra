@@ -7,7 +7,8 @@
 
 (defn- bench
   [options]
-  (let [dirs #{"bench"}
+  (let [dirs (or (:dir options)
+                 #{"bench"})
         namespaces (or (seq (:namespace options))
                        (->> dirs
                             (map io/file)
@@ -17,10 +18,16 @@
       (apply require :reload namespaces))
     (apply libra/run-benches namespaces)))
 
+(defn- acc-opts
+  [m k v]
+  (update-in m [k] (fnil conj #{}) v))
+
 (def cli-options
-  [["-n" "--namespace SYMBOL" "Symbol indicating a specific namespace to bench."
+  [["-d" "--dir DIR" "Name of the directory containing benchmarks, default \"bench\"."
+    :assoc-fn acc-opts]
+   ["-n" "--namespace SYMBOL" "Symbol indicating a specific namespace to run benchmarks."
     :parse-fn symbol
-    :assoc-fn (fn [m k v] (update-in m [k] (fnil conj #{}) v))]
+    :assoc-fn acc-opts]
    ["-h" "--help"]])
 
 (defn- help
