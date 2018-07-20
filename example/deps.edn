@@ -2,6 +2,6 @@
         net.totakke/libra {:mvn/version "0.1.1"}}
  :aliases {:libra {:extra-paths ["bench"]
                    :extra-deps {net.totakke/libra-runner {:git/url "https://github.com/totakke/libra"
-                                                          :sha "88bcb765f62034623c5471034f111c0be8c962d8"
+                                                          :sha "ee1ed682b99225ee7dfea477ac41d794ea2732d8"
                                                           :deps/root "libra-runner"}}
                    :main-opts ["-m" "libra.runner"]}}}

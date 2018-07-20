@@ -3,15 +3,25 @@
 [![Clojars Project](https://img.shields.io/clojars/v/net.totakke/libra.svg)](https://clojars.org/net.totakke/libra)
 [![CircleCI](https://circleci.com/gh/totakke/libra.svg?style=svg)](https://circleci.com/gh/totakke/libra)
 
-Simple benchmarking framework for Clojure.
+Benchmarking framework for Clojure
 
 ## Installation
 
-With Leiningen/Boot:
+### Core
+
+Leiningen/Boot:
 
 ```clojure
 [net.totakke/libra "0.1.1"]
 ```
+
+Clojure CLI:
+
+```clojure
+net.totakke/libra {:mvn/version "0.1.1"}
+```
+
+### Tools
 
 Leiningen plugin:
 
@@ -23,6 +33,14 @@ Boot task:
 
 ```clojure
 [net.totakke/boot-libra "0.1.0" :scope "test"]
+```
+
+CLI runner:
+
+```clojure
+net.totakke/libra-runner {:git/url "https://github.com/totakke/libra"
+                          :sha "ee1ed682b99225ee7dfea477ac41d794ea2732d8"
+                          :deps/root "libra-runner"}
 ```
 
 ## Getting started
@@ -61,15 +79,16 @@ The project consists of the following files.
 ```
 example/
 ├── bench/
-│   └── example/
-│       └── core_bench.clj
-├── project.clj or build.boot
+│   └── example/
+│       └── core_bench.clj
+├── project.clj or build.boot or deps.edn
 └── src/
     └── example/
         └── core.clj
 ```
 
-Locate your awesome codes in `src/example/core.clj` as usual, and write benchmarking programs in `bench/example/core_bench.clj`.
+Locate your awesome codes in `src/example/core.clj` as usual, and write
+benchmarking programs in `bench/example/core_bench.clj`.
 
 ```clojure
 (ns example.core-bench
@@ -123,6 +142,31 @@ the classpath, so that you should add a profile task for benchmarking:
 (deftask benchmarking []
   (set-env! :source-paths #(conj % "bench"))
   identity)
+```
+
+### With Clojure CLI
+
+Include a dependency on libra-runner in `deps.edn`.
+
+```clojure
+:aliases {:libra {:extra-paths ["bench"]
+                  :extra-deps {net.totakke/libra-runner {:git/url "https://github.com/totakke/libra"
+                                                         :sha "<git commit sha>"
+                                                         :deps/root "libra-runner"}}
+                  :main-opts ["-m" "libra.runner"]}}
+```
+
+Then, invoke `libra` alias with CLI.
+
+```console
+$ clj -Alibra
+```
+
+You may supply additional options:
+
+```
+-d, --dir DIR           Name of the directory containing benchmarks, default "bench".
+-n, --namespace SYMBOL  Symbol indicating a specific namespace to run benchmarks.
 ```
 
 ### Criterium integration
