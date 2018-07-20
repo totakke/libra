@@ -138,6 +138,6 @@ the classpath, so that you should add a profile task for benchmarking:
 
 ## License
 
-Copyright © 2017 Toshiki Takeuchi
+Copyright © 2017-2018 Toshiki Takeuchi
 
 Distributed under the MIT License.
