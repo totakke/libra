@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/libra
     docker:
-      - image: circleci/clojure:lein-2.7.1
+      - image: circleci/clojure:lein-2.8.1
     environment:
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m
@@ -11,10 +11,10 @@ jobs:
       - checkout
       - restore_cache:
           key: libra-{{ checksum "libra/project.clj" }}
-      - run: cd libra && lein with-profile +dev:+1.8:+1.9 deps
+      - run: cd libra && lein with-profile +dev:+1.8:+1.9:+1.10 deps
       - save_cache:
           paths:
             - ~/.m2
             - ~/.lein
           key: libra-{{ checksum "libra/project.clj" }}
-      - run: cd libra && lein with-profile +dev:+1.8:+1.9 test
+      - run: cd libra && lein with-profile +dev:+1.8:+1.9:+1.10 test
