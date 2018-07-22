@@ -32,7 +32,7 @@
 
 (defn- help
   [summary]
-  (println "Usage: clj -m" (namespace `usage) "[options]\n")
+  (println "Usage: clj -m" (namespace `usage) "[<options>]\n")
   (println summary))
 
 (defn- exit
