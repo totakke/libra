@@ -75,7 +75,7 @@
 (defmacro defbench
   [name & body]
   `(def ~(vary-meta name assoc :bench `(fn [] ~@body))
-        (fn [] (bench-var (var ~name)))))
+     (fn [] (bench-var (var ~name)))))
 
 (defn run-benches
   ([] (run-benches *ns*))
