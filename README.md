@@ -78,13 +78,13 @@ The project consists of the following files.
 
 ```
 example/
-├── bench/
-│   └── example/
-│       └── core_bench.clj
 ├── project.clj or build.boot or deps.edn
-└── src/
+├── src/
+│   └── example/
+│       └── core.clj
+└── bench/
     └── example/
-        └── core.clj
+        └── core_bench.clj
 ```
 
 Locate your awesome codes in `src/example/core.clj` as usual, and write
@@ -169,9 +169,10 @@ You may supply additional options:
 -n, --namespace SYMBOL  Symbol indicating a specific namespace to run benchmarks.
 ```
 
-### Criterium integration
+## Criterium integration
 
-`libra.criterium` provides wrapper macros of [Criterium](https://github.com/hugoduncan/criterium/).
+Libra can be used with a famous benchmarking library, [Criterium](https://github.com/hugoduncan/criterium/).
+`libra.criterium` provides wrapper macros of Criterium.
 
 ```clojure
 (require '[libra.criterium :as c])
