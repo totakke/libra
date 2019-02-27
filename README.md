@@ -39,7 +39,7 @@ CLI runner:
 
 ```clojure
 net.totakke/libra-runner {:git/url "https://github.com/totakke/libra"
-                          :sha "ee1ed682b99225ee7dfea477ac41d794ea2732d8"
+                          :sha "6d2da78300438cb212b58d17675fc9e5d405ad49"
                           :deps/root "libra-runner"}
 ```
 
@@ -167,6 +167,8 @@ You may supply additional options:
 ```
 -d, --dir DIR           Name of the directory containing benchmarks, default "bench".
 -n, --namespace SYMBOL  Symbol indicating a specific namespace to run benchmarks.
+-i, --include KEYWORD   Run only benchmarks that have this metadata keyword.
+-e, --exclude KEYWORD   Exclude benchmarks with this metadata keyword.
 ```
 
 ## Criterium integration
@@ -183,6 +185,6 @@ Libra can be used with a famous benchmarking library, [Criterium](https://github
 
 ## License
 
-Copyright © 2017-2018 Toshiki Takeuchi
+Copyright © 2017-2019 Toshiki Takeuchi
 
 Distributed under the MIT License.
